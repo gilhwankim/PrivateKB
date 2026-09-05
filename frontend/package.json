@@ -1,0 +1,37 @@
+{
+  "name": "privatekb-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "build:desktop": "tsc -b && vite build --mode desktop",
+    "test": "vitest run",
+    "desktop": "tauri",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build --no-bundle",
+    "runtime:pgvector": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ..\\scripts\\build-pgvector-windows.ps1",
+    "runtime:prepare": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ..\\scripts\\prepare-windows-dependencies.ps1",
+    "runtime:stage": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ..\\scripts\\build-windows.ps1 -Mode Stage",
+    "desktop:bundle": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ..\\scripts\\build-windows.ps1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.11.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "jsdom": "^30.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
+  }
+}

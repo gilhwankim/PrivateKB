@@ -1,0 +1,105 @@
+spring:
+  application:
+    name: privatekb
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${PRIVATEKB_DB_URL:jdbc:postgresql://127.0.0.1:${PRIVATEKB_DB_PORT:5433}/privatekb}
+    username: ${PRIVATEKB_DB_USER:privatekb}
+    password: ${PRIVATEKB_DB_PASSWORD}
+    hikari:
+      connection-timeout: ${PRIVATEKB_DB_CONNECTION_TIMEOUT_MS:5000}
+      validation-timeout: ${PRIVATEKB_DB_VALIDATION_TIMEOUT_MS:2000}
+  flyway:
+    enabled: true
+    create-schemas: true
+    default-schema: privatekb
+    schemas: privatekb
+  servlet:
+    multipart:
+      # HTTP 수신의 공통 상한. 실제 파일 제한은 선택 사양별로 별도 검증한다.
+      max-file-size: 100000000B
+      max-request-size: 101000000B
+      file-size-threshold: 0B
+
+privatekb:
+  desktop:
+    lifecycle-enabled: ${PRIVATEKB_DESKTOP_LIFECYCLE_ENABLED:false}
+    shutdown-token: ${PRIVATEKB_DESKTOP_SHUTDOWN_TOKEN:}
+    bridge-enabled: ${PRIVATEKB_DESKTOP_BRIDGE_ENABLED:false}
+    bridge-token: ${PRIVATEKB_DESKTOP_BRIDGE_TOKEN:}
+  storage:
+    root: ${PRIVATEKB_STORAGE_ROOT:./data/privatekb}
+    # 파일 복사와 후속 텍스트·벡터 처리를 위해 항상 남겨 둘 안전 여유 공간.
+    minimum-free-bytes: ${PRIVATEKB_STORAGE_MINIMUM_FREE_BYTES:536870912}
+  ingestion:
+    max-upload-bytes: 100000000
+    max-extracted-characters: 5000000
+    parsing-timeout: 30s
+    max-attempts: 3
+  ocr:
+    enabled: ${PRIVATEKB_OCR_ENABLED:true}
+    executable-directory: ${PRIVATEKB_OCR_EXECUTABLE_DIRECTORY:./frontend/src-tauri/runtime/ocr}
+    data-path: ${PRIVATEKB_OCR_DATA_PATH:./frontend/src-tauri/runtime/ocr/tessdata}
+    language: kor+eng
+    dpi: 300
+    maximum-pages: 20
+    maximum-pixels-per-page: 25000000
+    maximum-total-pixels: 250000000
+    minimum-temporary-free-bytes: 100000000
+    page-timeout: 30s
+    document-timeout: 3m
+    resume-batch-size: 100
+  local-ai:
+    base-url: http://127.0.0.1:11434
+    embedding-model: qwen3-embedding:0.6b
+    embedding-dimensions: 1024
+    connect-timeout: 2s
+    request-timeout: 3s
+    embedding-request-timeout: 120s
+    chat-request-timeout: 180s
+    model-install-timeout: 2h
+    startup-check-enabled: true
+  indexing:
+    chunk-size: 1200
+    chunk-overlap: 180
+    embedding-batch-size: 16
+    database-batch-size: 64
+    database-batch-retries: 3
+    staging-retention: 72h
+    max-attempts: 3
+  search:
+    minimum-query-characters: 2
+    maximum-query-characters: 500
+    maximum-results: 10
+    candidate-multiplier: 8
+    minimum-candidates: 20
+    maximum-candidates: 100
+    minimum-result-score: 0.40
+  answer:
+    minimum-question-characters: 2
+    maximum-question-characters: 1000
+    maximum-source-chunks: 7
+    minimum-grounding-score: 0.50
+    maximum-context-characters: 18000
+    stream-timeout: 180s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+server:
+  address: 127.0.0.1
+  error:
+    include-message: never
+
+logging:
+  level:
+    root: INFO
+    org.springframework.jdbc.core: INFO
+    org.springframework.web: INFO

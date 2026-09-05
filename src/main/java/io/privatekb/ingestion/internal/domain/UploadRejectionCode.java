@@ -1,0 +1,15 @@
+package io.privatekb.ingestion.internal.domain;
+
+public enum UploadRejectionCode {
+    EMPTY_FILE,
+    SIZE_MISMATCH,
+    FILE_TOO_LARGE,
+    INSUFFICIENT_STORAGE,
+    INVALID_FILENAME,
+    UNSUPPORTED_EXTENSION,
+    UNSUPPORTED_MEDIA_TYPE,
+    MEDIA_TYPE_MISMATCH,
+    WORKSPACE_NOT_FOUND,
+    JOB_NOT_FOUND,
+    RETRY_NOT_ALLOWED
+}

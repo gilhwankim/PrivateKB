@@ -1,0 +1,18 @@
+package io.privatekb.ingestion.internal.domain;
+
+public enum IngestionErrorCode {
+    PARSE_TIMEOUT,
+    PARSE_LIMIT_EXCEEDED,
+    PARSE_IO,
+    PARSE_FAILED,
+    OCR_NOT_AVAILABLE,
+    OCR_TIMEOUT,
+    OCR_PAGE_LIMIT_EXCEEDED,
+    OCR_PIXEL_LIMIT_EXCEEDED,
+    OCR_TEMP_STORAGE_INSUFFICIENT,
+    OCR_NO_TEXT,
+    OCR_FAILED,
+    PDF_ENCRYPTED,
+    STORAGE_FAILURE,
+    INTERNAL_ERROR
+}

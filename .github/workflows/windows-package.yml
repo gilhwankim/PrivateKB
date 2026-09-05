@@ -1,0 +1,56 @@
+name: Windows 설치 파일 만들기
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-package-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: powershell
+    steps:
+      - name: 소스 내려받기
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Node.js 준비
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+      - name: Rust 도구 확인
+        run: |
+          rustup toolchain install 1.98.0 --profile minimal --target x86_64-pc-windows-msvc
+          if ($LASTEXITCODE -ne 0) { throw 'Rust 준비 실패' }
+      - name: 검증 후 설치 파일 생성
+        run: .\scripts\build-windows.ps1
+      - name: 설치 파일과 검증 정보 보관
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: PrivateKB-windows-x64
+          path: |
+            frontend/src-tauri/target/release/bundle/nsis/*-setup.exe
+            frontend/src-tauri/target/release/bundle/nsis/*-setup.exe.sha256
+            frontend/src-tauri/target/release/bundle/nsis/*-setup.exe.build.json
+            scripts/windows-dependencies.lock.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: 테스트 보고서 보관
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: windows-test-reports
+          path: |
+            build/reports/tests/
+            build/runtime-smoke-*/backend.*.log
+            build/runtime-smoke-*/postgres.log
+          if-no-files-found: ignore
+          retention-days: 7

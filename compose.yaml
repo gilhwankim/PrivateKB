@@ -1,0 +1,28 @@
+name: privatekb
+
+services:
+  database:
+    image: pgvector/pgvector:0.8.6-pg18-trixie
+    environment:
+      POSTGRES_DB: privatekb
+      POSTGRES_USER: privatekb
+      POSTGRES_PASSWORD: ${PRIVATEKB_DB_PASSWORD:?Set PRIVATEKB_DB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${PRIVATEKB_DB_PORT:-5433}:5432"
+    volumes:
+      - privatekb-postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U privatekb -d privatekb"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - privatekb-internal
+
+volumes:
+  privatekb-postgres:
+
+networks:
+  privatekb-internal:

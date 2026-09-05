@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "artifacts": {
+    "sevenZipBootstrap": {
+      "version": "26.02",
+      "file": "7zr-26.02.exe",
+      "url": "https://github.com/ip7z/7zip/releases/download/26.02/7zr.exe",
+      "sha256": "56b8cc9f4971cef253644fafe54063ed7fdca551d4dee0f8c6baa81b855acd72"
+    },
+    "sevenZip": {
+      "version": "26.02",
+      "file": "7z2602-x64.exe",
+      "url": "https://github.com/ip7z/7zip/releases/download/26.02/7z2602-x64.exe",
+      "sha256": "6745fa76dc2ea031596d8678f6f6b99c3c1b435b4164a63485adbbc7b8d82ef0"
+    },
+    "jdk": {
+      "version": "21.0.12.1+1",
+      "file": "OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip",
+      "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip",
+      "sha256": "f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e",
+      "root": "jdk-21.0.12.1+1"
+    },
+    "postgresql": {
+      "version": "18.4",
+      "file": "postgresql-18.4-1-windows-x64-binaries.zip",
+      "url": "https://get.enterprisedb.com/postgresql/postgresql-18.4-1-windows-x64-binaries.zip",
+      "sha256": "7effe34c0bf89027b3f171447d351cbc460f4566c8d0f643daec67f140787858"
+    },
+    "pgvector": {
+      "version": "0.8.6",
+      "file": "pgvector-0.8.6-8ee86c9.zip",
+      "url": "https://codeload.github.com/pgvector/pgvector/zip/8ee86c96f0fd72390f890aa8a336fda6d3ab4c6c",
+      "sha256": "bf0e885aeea36c555da5e0c68869d2282ed53020b4388202dae20368f4a9b5ae",
+      "root": "pgvector-8ee86c96f0fd72390f890aa8a336fda6d3ab4c6c"
+    },
+    "tesseract": {
+      "version": "5.4.0.20240606",
+      "file": "tesseract-ocr-w64-setup-5.4.0.20240606.exe",
+      "url": "https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.4.0.20240606.exe",
+      "sha256": "c885fff6998e0608ba4bb8ab51436e1c6775c2bafc2559a19b423e18678b60c9"
+    },
+    "ocrEnglish": {
+      "version": "tessdata_fast-8741641",
+      "file": "eng.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/eng.traineddata",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    },
+    "ocrKorean": {
+      "version": "tessdata_fast-8741641",
+      "file": "kor.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/kor.traineddata",
+      "sha256": "6b85e11d9bbf07863b97b3523b1b112844c43e713df8b66418a081fd1060b3b2"
+    },
+    "ocrDataLicense": {
+      "version": "tessdata_fast-8741641",
+      "file": "tessdata-fast-LICENSE",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  }
+}
