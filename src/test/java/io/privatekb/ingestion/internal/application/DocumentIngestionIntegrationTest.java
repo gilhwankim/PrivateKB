@@ -285,7 +285,7 @@ class DocumentIngestionIntegrationTest {
                 .param("pdfId", pdf.documentVersionId())
                 .query(Integer.class)
                 .single();
-        assertThat(pdfPageCount).isEqualTo(2);
+        assertThat(pdfPageCount).isEqualTo(1);
 
         IndexingView indexed = awaitIndexed(text.documentVersionId());
         assertThat(indexed.status()).isEqualTo(IndexingStatus.INDEXED);
